@@ -2,10 +2,10 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
-import RestoreIcon from '@material-ui/icons/Restore';
 import FavoriteIcon from '@material-ui/icons/Favorite';
-import LocationOnIcon from '@material-ui/icons/LocationOn';
-import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
+import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
+import SettingsRoundedIcon from '@material-ui/icons/SettingsRounded';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
   root: {
@@ -29,20 +29,20 @@ const SimpleBottomNavigation = () => {
       className={classes.root}
     >
       <BottomNavigationAction
-        label="タイムライン"
-        icon={<RestoreIcon />}
+        label="Home"
+        icon={<HomeRoundedIcon />}
         component={Link}
         to="/timeline"
       />
       <BottomNavigationAction
-        label="いいね 一覧"
+        label="Good List"
         icon={<FavoriteIcon />}
         component={Link}
         to="/goodlist"
       />
       <BottomNavigationAction
-        label="設定"
-        icon={<LocationOnIcon />}
+        label="Setting"
+        icon={<SettingsRoundedIcon />}
         component={Link}
         to="/setting"
       />

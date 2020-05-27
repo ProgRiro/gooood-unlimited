@@ -1,6 +1,6 @@
 import firebase from 'firebase';
-// import 'firebase/firestore'; //firestoreを使う場合
-// import 'firebase/auth';
+import 'firebase/firestore'; //firestoreを使う場合
+import 'firebase/auth';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -19,6 +19,6 @@ firebase.analytics();
 
 // export const providerGoogle = new firebase.auth.GoogleAuthProvider();
 // export const providerFacebook = new firebase.auth.FacebookAuthProvider();
-// export const providerTwitter = new firebase.auth.TwitterAuthProvider();
-// export const db = firebase.firestore(); //firestroeを使う場合
+export const providerTwitter = new firebase.auth.TwitterAuthProvider();
+export const db = firebase.firestore(); //firestroeを使う場合
 export default firebase;
