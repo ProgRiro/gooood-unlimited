@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import SimpleBottomNavigation from './components/BottomNavigation';
 import TimeLine from './pages/TimeLine';
 import GoodList from './pages/GoodList';
 import Setting from './pages/Setting';
 import firebase, { db, providerTwitter } from './config';
 import Button from '@material-ui/core/Button';
+import { TwitterLoginButton } from 'react-social-login-buttons';
+import { makeStyles } from '@material-ui/core/styles';
 
 //ページの中身用のコンポーネントを作成
 const topPage = () => (
@@ -14,14 +16,28 @@ const topPage = () => (
     <h1>Top Page</h1>ここがトップページです
   </div>
 );
+
 const page404 = () => (
   <div>
     <h1>404</h1>存在しないページです
   </div>
 );
 
+const useStyles = makeStyles({
+  root: {
+    position: 'fixed',
+    bottom: 0,
+    width: '100%',
+  },
+  notLoginContainer: {
+    width: '100%',
+  },
+});
+
 function App() {
+  const classes = useStyles();
   const [isLogin, setIsLogin] = useState(false);
+
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
@@ -47,12 +63,12 @@ function App() {
       })
       .catch(function (error) {
         // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
+        // var errorCode = error.code;
+        // var errorMessage = error.message;
         // The email of the user's account used.
-        var email = error.email;
+        // var email = error.email;
         // The firebase.auth.AuthCredential type that was used.
-        var credential = error.credential;
+        // var credential = error.credential;
         // ...
       });
   };
@@ -72,11 +88,6 @@ function App() {
       .catch(function (error) {
         // An error happened.
       });
-
-    // firebase
-    //   .auth()
-    //   .currentUser.delete()
-    //   .then(() => {});
   };
 
   const pushData = async (uid, token, secret) => {
@@ -116,16 +127,16 @@ function App() {
     <div className="App">
       {isLogin ? (
         <Router>
+          <Button color="secondary" onClick={logout}>
+            ログアウト
+          </Button>
+          <Button color="primary" onClick={fetchData}>
+            取得
+          </Button>
+          <Button color="primary" onClick={pushData}>
+            登録
+          </Button>
           <div className="App-header">
-            <Button variant="raised" color="secondary" onClick={logout}>
-              ログアウト
-            </Button>
-            <Button color="primary" onClick={fetchData}>
-              取得
-            </Button>
-            <Button color="primary" onClick={pushData}>
-              登録
-            </Button>
             <Switch>
               <Route path="/" exact component={topPage} />
               <Route path="/timeline" exact component={TimeLine} />
@@ -138,9 +149,21 @@ function App() {
           <SimpleBottomNavigation />
         </Router>
       ) : (
-        <Button variant="raised" color="primary" onClick={login}>
-          Twitterログイン
-        </Button>
+        <div className={classes.notLoginContainer}>
+          <TwitterLoginButton
+            onClick={login}
+            style={{
+              width: 200,
+              margin: '0 auto',
+              fontSize: 16,
+              fontWeight: 'bold',
+            }}
+            align={'center'}
+            iconSize={20}
+          >
+            Twitterログイン
+          </TwitterLoginButton>
+        </div>
       )}
     </div>
   );
