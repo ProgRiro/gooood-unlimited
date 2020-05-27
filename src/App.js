@@ -8,8 +8,8 @@ import GoodList from './pages/GoodList';
 import Setting from './pages/Setting';
 import firebase, { db, providerTwitter } from './config';
 import Button from '@material-ui/core/Button';
-import { TwitterLoginButton } from 'react-social-login-buttons';
-import { makeStyles } from '@material-ui/core/styles';
+// import { TwitterLoginButton } from 'react-social-login-buttons';
+// import { makeStyles } from '@material-ui/core/styles';
 
 //ページの中身用のコンポーネントを作成
 const topPage = () => (
@@ -24,19 +24,19 @@ const page404 = () => (
   </div>
 );
 
-const useStyles = makeStyles({
-  root: {
-    position: 'fixed',
-    bottom: 0,
-    width: '100%',
-  },
-  notLoginContainer: {
-    width: '100%',
-  },
-});
+// const useStyles = makeStyles({
+//   root: {
+//     position: 'fixed',
+//     bottom: 0,
+//     width: '100%',
+//   },
+//   notLoginContainer: {
+//     width: '100%',
+//   },
+// });
 
 function App() {
-  const classes = useStyles();
+  // const classes = useStyles();
   const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
@@ -150,21 +150,7 @@ function App() {
           <SimpleBottomNavigation />
         </Router>
       ) : (
-        <div className={classes.notLoginContainer}>
-          <TwitterLoginButton
-            onClick={login}
-            style={{
-              width: 200,
-              margin: '0 auto',
-              fontSize: 16,
-              fontWeight: 'bold',
-            }}
-            align={'center'}
-            iconSize={20}
-          >
-            Twitterログイン
-          </TwitterLoginButton>
-        </div>
+        <Home login={() => login} />
       )}
     </div>
   );

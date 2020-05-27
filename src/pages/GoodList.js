@@ -82,7 +82,7 @@ const GoodList = () => {
     const changePosts = () => {
       tmpDatas.push(Object.assign({}, { ...posts.tweet }));
       tmpDatas.forEach((elm) => {
-        console.log(posts);
+        // console.log(posts);
         dataLists = Object.keys(elm).map((key, i) => {
           // console.log(`key: ${key} value: ${elm[key].full_text}`);
           // console.log(
