@@ -4,7 +4,7 @@ import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
-import SettingsRoundedIcon from '@material-ui/icons/SettingsRounded';
+import ListAltRoundedIcon from '@material-ui/icons/ListAltRounded';
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles({
@@ -29,22 +29,22 @@ const SimpleBottomNavigation = () => {
       className={classes.root}
     >
       <BottomNavigationAction
-        label="Home"
+        label="トップ"
         icon={<HomeRoundedIcon />}
+        component={Link}
+        to="/top"
+      />
+      <BottomNavigationAction
+        label="タイムライン"
+        icon={<ListAltRoundedIcon />}
         component={Link}
         to="/timeline"
       />
       <BottomNavigationAction
-        label="Good List"
+        label="いいね"
         icon={<FavoriteIcon />}
         component={Link}
         to="/goodlist"
-      />
-      <BottomNavigationAction
-        label="Setting"
-        icon={<SettingsRoundedIcon />}
-        component={Link}
-        to="/setting"
       />
     </BottomNavigation>
   );
