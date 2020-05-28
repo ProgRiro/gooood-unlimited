@@ -8,7 +8,6 @@ import Typography from '@material-ui/core/Typography';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
-import ScrollTopButton from '../components/ScrollTopButton';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 
@@ -32,25 +31,24 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Home = (props) => {
-  const { children, window } = props;
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar>
+      {/* <AppBar>
         <Toolbar>
           <Typography variant="h6">Good Unlimited</Typography>
         </Toolbar>
       </AppBar>
-      <Toolbar id="back-to-top-anchor" />
+      <Toolbar id="back-to-top-anchor" /> */}
       <Container>
         <Grid container spacing={3}>
           <Grid item xs={12} md={4}>
             <Paper className={classes.paper}>
               <Box my={2}>
                 <Typography variant="h2">Good Unlimited</Typography>
-                <Typography variant="p" component="p">
+                <Typography variant="subtitle1">
                   <br />
                   あの人の投稿に、無限回いいねしよう
                   <br />
@@ -82,7 +80,6 @@ const Home = (props) => {
           </Grid>
         </Grid>
       </Container>
-      <ScrollTopButton children={children} window={window} />
     </div>
   );
 };

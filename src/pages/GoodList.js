@@ -6,7 +6,8 @@ import TweetCard from '../components/TweetCard';
 import axios from 'axios';
 import { css } from '@emotion/core';
 import PulseLoader from 'react-spinners/PulseLoader';
-import errorImage from '../error.svg';
+import errorImage from '../imgs/error.svg';
+import Typography from '@material-ui/core/Typography';
 
 const override = css`
   display: block;
@@ -22,6 +23,11 @@ const useStyles = makeStyles({
     marginBottom: 60,
     marginLeft: 'auto',
     marginRight: 'auto',
+  },
+  errorBox: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
@@ -126,14 +132,27 @@ const GoodList = () => {
           loading={loading}
         />
       </div>
-      <div style={{ display: isError ? 'block' : 'none' }}>
-        <h1 style={{ color: 'black' }}>sorry...</h1>
-        <img src={errorImage} width="100" />
-        <p style={{ color: 'black', fontSize: 14 }}>
+      <div
+        className={classes.errorBox}
+        style={{ display: isError ? 'flex' : 'none' }}
+      >
+        <Typography variant="h2" style={{ color: 'black' }}>
+          sorry...
+        </Typography>
+        <img
+          src={errorImage}
+          width="100"
+          style={{ marginTop: 20, marginBottom: 20 }}
+        />
+        <Typography
+          variant="subtitle1"
+          style={{ color: 'black' }}
+          align="center"
+        >
           通信エラーが発生しました
           <br />
           時間をあけて再度アクセスしてください
-        </p>
+        </Typography>
       </div>
       <Grid container spacing={1} className={classes.root}>
         {data.map((card, i) => {
