@@ -4,20 +4,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import TweetCard from '../components/TweetCard';
 import axios from 'axios';
-import { css } from '@emotion/core';
 import PulseLoader from 'react-spinners/PulseLoader';
-import errorImage from '../imgs/error.svg';
 import Typography from '@material-ui/core/Typography';
-
-const override = css`
-  display: block;
-  margin: 0 auto;
-  border-color: red;
-`;
+import IconButton from '@material-ui/core/IconButton';
+import errorImage from '../imgs/error.svg';
 
 const useStyles = makeStyles({
   root: {
-    // flexGrow: 1,
     width: '100%',
     marginTop: 10,
     marginBottom: 60,
@@ -33,6 +26,36 @@ const useStyles = makeStyles({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+    height: '80vh',
+  },
+  loaderBox: {
+    position: 'fixed',
+    top: 0,
+    width: '100%',
+    height: '100%',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 99,
+    backgroundColor: '#fff',
+  },
+  refreshBox: {
+    position: 'fixed',
+    display: 'flex',
+    justifyContent: 'center',
+    width: '100%',
+    bottom: 70,
+  },
+  refreshButton: {
+    // width: '60%',
+    padding: '8px 40px',
+    color: '#fff',
+    backgroundColor: '#00acee',
+    borderRadius: 50,
+    borderWidth: 0,
+    '&:focus': {
+      outline: 0,
+    },
   },
 });
 
@@ -43,6 +66,7 @@ const TimeLine = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isError, setIsError] = useState(false);
+  const [isRefresh, setIsRefresh] = useState(false);
   let tmpDatas = [];
   let dataLists = [];
 
@@ -50,9 +74,8 @@ const TimeLine = () => {
     const getUid = () => {
       firebase.auth().onAuthStateChanged((user) => {
         if (user) {
-          console.log('is login');
+          // console.log('is login');
           setUid(user.uid);
-          // this.getTasksData();
         } else {
           console.log('is not login');
         }
@@ -60,8 +83,6 @@ const TimeLine = () => {
     };
 
     getUid();
-
-    return () => getUid;
   }, []);
 
   useEffect(() => {
@@ -86,22 +107,13 @@ const TimeLine = () => {
     };
 
     getData();
-
-    // unmount
-    return () => getData;
-  }, [uid]);
+  }, [uid, isRefresh]);
 
   useEffect(() => {
     const changePosts = () => {
       tmpDatas.push(Object.assign({}, { ...posts[Object.keys(posts)[1]] }));
       tmpDatas.forEach((elm) => {
         dataLists = Object.keys(elm).map((key, i) => {
-          // console.log(`key: ${key} value: ${elm[key].text}`);
-          // console.log(
-          //   elm[key]['entities']['media']
-          //     ? elm[key]['entities']['media'][0].media_url_https
-          //     : ''
-          // );
           return (
             <TweetCard
               key={i}
@@ -124,19 +136,20 @@ const TimeLine = () => {
     };
 
     changePosts();
-
-    return () => changePosts;
   }, [posts]);
+
+  const isRefreshFunc = () => {
+    setIsRefresh(!isRefresh);
+    setLoading(true);
+  };
 
   return (
     <>
-      <div className="sweet-loading">
-        <PulseLoader
-          css={override}
-          size={15}
-          color={'#123abc'}
-          loading={loading}
-        />
+      <div
+        className={classes.loaderBox}
+        style={{ display: loading ? 'flex' : 'none' }}
+      >
+        <PulseLoader size={10} color={'#123abc'} loading={loading} />
       </div>
       <div
         className={classes.errorBox}
@@ -151,6 +164,7 @@ const TimeLine = () => {
           style={{ marginTop: 20, marginBottom: 20 }}
         />
         <Typography
+          display="inline"
           variant="subtitle1"
           style={{ color: 'black' }}
           align="center"
@@ -169,6 +183,15 @@ const TimeLine = () => {
           );
         })}
       </Grid>
+      <div className={classes.refreshBox}>
+        <button
+          onClick={isRefreshFunc}
+          className={classes.refreshButton}
+          // type="button"
+        >
+          {!loading && <Typography variant="button">再読み込み</Typography>}
+        </button>
+      </div>
     </>
   );
 };

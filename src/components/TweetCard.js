@@ -11,6 +11,8 @@ import Typography from '@material-ui/core/Typography';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
 import firebase, { db } from '../config';
 
 const useStyles = makeStyles((theme) => ({
@@ -33,18 +35,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function RecipeReviewCard(props) {
+export default function TweetCard(props) {
   const classes = useStyles();
   const [uid, setUid] = useState([]);
   const [goodNum, setGoodNum] = useState(props.goodNum);
-  const [tweetId, setTweetId] = useState(props.tweetId);
   const [favoriteColor, setFavoriteColor] = useState('gray');
+  const [anchorEl, setAnchorEl] = useState(null);
+  const tweetId = props.tweetId;
+  const open = Boolean(anchorEl);
 
   useEffect(() => {
     const getUid = () => {
       firebase.auth().onAuthStateChanged((user) => {
         if (user) {
-          console.log('is login');
+          // console.log('is login');
           setUid(user.uid);
         } else {
           console.log('is not login');
@@ -68,10 +72,26 @@ export default function RecipeReviewCard(props) {
         tweetId: tweetId,
       })
       .then(function () {
-        console.log('Document successfully written!');
+        // console.log('Document successfully written!');
       })
       .catch(function (error) {
         console.error('Error writing document: ', error);
+      });
+  };
+
+  const deleteData = async () => {
+    await db
+      .collection('users')
+      .doc(uid)
+      .collection('gooood')
+      .doc(tweetId)
+      .delete()
+      .then(function () {
+        props.isRefreshFunc();
+        // console.log('Document successfully delete!');
+      })
+      .catch(function (error) {
+        console.error('Error deleting document: ', error);
       });
   };
 
@@ -83,33 +103,86 @@ export default function RecipeReviewCard(props) {
     pushData();
   };
 
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleDelete = () => {
+    deleteData();
+    handleClose();
+  };
+
   return (
     <Card className={classes.root}>
       <CardHeader
         avatar={<Avatar aria-label="Icon" src={props.profileImageUrl} />}
         action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
+          <div>
+            <IconButton
+              aria-label="delete-menu"
+              aria-controls="menu-delete"
+              aria-haspopup="true"
+              onClick={handleMenu}
+              color="inherit"
+            >
+              <MoreVertIcon />
+            </IconButton>
+            <Menu
+              id="menu-delete"
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={open}
+              onClose={handleClose}
+            >
+              <MenuItem onClick={handleClose}>
+                <a
+                  target="_blank"
+                  href={`https://twitter.com/${props.screenName}/status/${props.tweetId}`}
+                  style={{ textDecoration: 'none', color: 'inherit' }}
+                >
+                  このツイートをTwitterで表示する
+                </a>
+              </MenuItem>
+              {props.goodNum > 1 && (
+                <MenuItem onClick={handleDelete}>
+                  このツイートをいいね記録から削除
+                </MenuItem>
+              )}
+              <MenuItem onClick={handleClose} style={{ color: 'red' }}>
+                閉じる
+              </MenuItem>
+            </Menu>
+          </div>
         }
         title={props.name}
-        subheader={props.screenName}
+        subheader={
+          <a
+            target="_blank"
+            href={`https://twitter.com/${props.screenName}`}
+            style={{ textDecoration: 'none', color: '#00acee' }}
+          >
+            @{props.screenName}
+          </a>
+        }
         align="left"
       />
       {props.mediaImage !== '' && (
-        <CardMedia
-          className={classes.media}
-          image={props.mediaImage}
-          title="Paella dish"
-        />
+        <CardMedia className={classes.media} image={props.mediaImage} />
       )}
       <CardContent>
-        <Typography
-          variant="body2"
-          color="textPrimary"
-          component="p"
-          align="left"
-        >
+        <Typography variant="body2" color="textPrimary" align="left">
           {props.text}
         </Typography>
       </CardContent>

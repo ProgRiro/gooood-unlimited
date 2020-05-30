@@ -16,6 +16,7 @@ import Page404 from './pages/Page404';
 import firebase, { db, providerTwitter } from './config';
 import PulseLoader from 'react-spinners/PulseLoader';
 import { makeStyles } from '@material-ui/core/styles';
+import GlobalStyle from './grobalStyles';
 
 const useStyles = makeStyles({
   sweetLoading: {
@@ -29,6 +30,9 @@ const useStyles = makeStyles({
     height: '100%',
     zIndex: 99,
   },
+  appBody: {
+    marginTop: 65,
+  },
 });
 
 function App() {
@@ -39,12 +43,12 @@ function App() {
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        console.log('is login');
+        // console.log('is login');
         setIsLogin(true);
         setLoading(false);
         // this.getTasksData();
       } else {
-        console.log('is not login');
+        // console.log('is not login');
         setIsLogin(false);
         setLoading(false);
       }
@@ -105,42 +109,26 @@ function App() {
         secret: secret,
       })
       .then(function () {
-        console.log('Document successfully written!');
+        // console.log('Document successfully written!');
       })
       .catch(function (error) {
         console.error('Error writing document: ', error);
       });
   };
 
-  const fetchData = () => {
-    db.collection('users')
-      .doc('lWJJm6AYuR019476RQaG')
-      .get()
-      .then(function (doc) {
-        if (doc.exists) {
-          console.log('Document data:', doc.data());
-        } else {
-          // doc.data() will be undefined in this case
-          console.log('No such document!');
-        }
-      })
-      .catch(function (error) {
-        console.log('Error getting document:', error);
-      });
-  };
-
   return (
     <>
+      <GlobalStyle />
       <div
         className={classes.sweetLoading}
         style={{ display: loading ? 'flex' : 'none' }}
       >
-        <PulseLoader size={15} color={'#123abc'} loading={loading} />
+        <PulseLoader size={10} color={'#123abc'} loading={loading} />
       </div>
       {/* <div className={classes.root}> */}
       <TopNavbar />
       <Router>
-        <div className="App-header">
+        <div className={classes.appBody}>
           <Switch>
             <Route
               path="/"

@@ -4,20 +4,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import TweetCard from '../components/TweetCard';
 import axios from 'axios';
-import { css } from '@emotion/core';
 import PulseLoader from 'react-spinners/PulseLoader';
 import errorImage from '../imgs/error.svg';
 import Typography from '@material-ui/core/Typography';
 
-const override = css`
-  display: block;
-  margin: 0 auto;
-  border-color: red;
-`;
-
 const useStyles = makeStyles({
   root: {
-    // flexGrow: 1,
     width: '100%',
     marginTop: 10,
     marginBottom: 60,
@@ -28,6 +20,13 @@ const useStyles = makeStyles({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+    height: '80vh',
+  },
+  loaderBox: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '80vh',
   },
 });
 
@@ -38,6 +37,7 @@ const GoodList = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isError, setIsError] = useState(false);
+  const [isRefresh, setIsRefresh] = useState(false);
   let tmpDatas = [];
   let dataLists = [];
 
@@ -82,20 +82,17 @@ const GoodList = () => {
 
     // unmount
     return () => getData;
-  }, [uid]);
+  }, [uid, isRefresh]);
+
+  const isRefreshFunc = () => {
+    setIsRefresh(!isRefresh);
+  };
 
   useEffect(() => {
     const changePosts = () => {
       tmpDatas.push(Object.assign({}, { ...posts.tweet }));
       tmpDatas.forEach((elm) => {
-        // console.log(posts);
         dataLists = Object.keys(elm).map((key, i) => {
-          // console.log(`key: ${key} value: ${elm[key].full_text}`);
-          // console.log(
-          //   elm[key]['entities']['media']
-          //     ? elm[key]['entities']['media'][0].media_url_https
-          //     : ''
-          // );
           return (
             <TweetCard
               key={i}
@@ -110,6 +107,7 @@ const GoodList = () => {
               }
               tweetId={elm[key].id_str}
               goodNum={posts.goodList[i] ? posts.goodList[i] + 1 : 1}
+              isRefreshFunc={() => isRefreshFunc()}
             />
           );
         });
@@ -124,13 +122,11 @@ const GoodList = () => {
 
   return (
     <>
-      <div className="sweet-loading">
-        <PulseLoader
-          css={override}
-          size={15}
-          color={'#123abc'}
-          loading={loading}
-        />
+      <div
+        className={classes.loaderBox}
+        style={{ display: loading ? 'flex' : 'none' }}
+      >
+        <PulseLoader size={10} color={'#123abc'} loading={loading} />
       </div>
       <div
         className={classes.errorBox}
