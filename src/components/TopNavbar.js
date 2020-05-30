@@ -10,6 +10,15 @@ import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
+import { TwitterShareButton, TwitterIcon } from 'react-share';
+
+const config = {
+  shareTitle: '👍 Good Unlimited 👍',
+  shareText:
+    'お気に入りのツイートを無限に いいね❤️ して、いいねした数をTwitterでシェアしよう！',
+  tag: '#GoodUnlimited #無限いいね',
+  size: 32,
+};
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,10 +31,6 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   confirmBox: {
-    width: 300,
-    padding: 15,
-    backgroundColor: '#F0F0F0',
-    borderRadius: 5,
     textAlign: 'center',
   },
   confirmButton: {
@@ -34,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MenuAppBar() {
+export default function MenuAppBar(props) {
   const classes = useStyles();
   const [auth, setAuth] = React.useState(false);
 
@@ -101,10 +106,13 @@ export default function MenuAppBar() {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar
+        position="fixed"
+        style={{ color: '#00acee', backgroundColor: 'white' }}
+      >
         <Toolbar>
           <Typography variant="h6" className={classes.title} align="left">
-            👍　Good Unlimited　👍
+            Good Unlimited
           </Typography>
           {auth && (
             <IconButton
@@ -115,6 +123,19 @@ export default function MenuAppBar() {
               <ExitToAppRoundedIcon />
             </IconButton>
           )}
+          <TwitterShareButton
+            title={
+              config.shareTitle +
+              '\n\n' +
+              config.shareText +
+              '\n\n' +
+              config.tag +
+              '\n'
+            }
+            url="https://gooood-unlimited.web.app/"
+          >
+            <TwitterIcon size={config.size} round={true} />
+          </TwitterShareButton>
         </Toolbar>
       </AppBar>
     </div>

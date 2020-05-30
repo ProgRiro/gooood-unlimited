@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
@@ -11,13 +11,17 @@ const useStyles = makeStyles({
   root: {
     position: 'fixed',
     bottom: 0,
+    left: 0,
     width: '100%',
+    // height: 45,
+    zIndex: 99,
+    backgroundColor: '#f1f2f6',
   },
 });
 
 const SimpleBottomNavigation = () => {
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
 
   return (
     <BottomNavigation
@@ -25,23 +29,22 @@ const SimpleBottomNavigation = () => {
       onChange={(event, newValue) => {
         setValue(newValue);
       }}
-      showLabels
       className={classes.root}
     >
       <BottomNavigationAction
-        label="トップ"
+        // label="トップ"
         icon={<HomeRoundedIcon />}
         component={Link}
         to="/top"
       />
       <BottomNavigationAction
-        label="タイムライン"
+        // label="タイムライン"
         icon={<ListAltRoundedIcon />}
         component={Link}
         to="/timeline"
       />
       <BottomNavigationAction
-        label="いいね"
+        // label="いいね"
         icon={<FavoriteIcon />}
         component={Link}
         to="/goodlist"

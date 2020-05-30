@@ -13,3 +13,12 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
+html,
+css {
+  touch-action: none;
+}
+
+html {
+  touch-action: manipulation;
+}

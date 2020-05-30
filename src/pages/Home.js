@@ -11,6 +11,12 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 
+// for slideshow
+import slideImage1 from '../imgs/slide1.png';
+import slideImage2 from '../imgs/slide2.png';
+import slideImage3 from '../imgs/slide3.png';
+import slideImage4 from '../imgs/slide4.png';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -32,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Home = (props) => {
   const classes = useStyles();
+  const fadeImages = [slideImage1, slideImage2, slideImage3, slideImage4];
 
   return (
     <div className={classes.root}>
@@ -75,7 +82,7 @@ const Home = (props) => {
           </Grid>
           <Grid item xs={12} md={8}>
             <Paper className={classes.paper}>
-              <SlideShow />
+              <SlideShow images={fadeImages} />
             </Paper>
           </Grid>
         </Grid>
