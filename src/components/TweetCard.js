@@ -14,6 +14,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import firebase, { db } from '../config';
+import { useSpring, animated } from 'react-spring';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,10 +40,17 @@ export default function TweetCard(props) {
   const classes = useStyles();
   const [uid, setUid] = useState([]);
   const [goodNum, setGoodNum] = useState(props.goodNum);
+  const [isClicked, setIsClicked] = useState(true);
   const [favoriteColor, setFavoriteColor] = useState('gray');
   const [anchorEl, setAnchorEl] = useState(null);
   const tweetId = props.tweetId;
   const open = Boolean(anchorEl);
+
+  const { x } = useSpring({
+    from: { x: 0 },
+    x: isClicked ? 1 : 0,
+    config: { duration: 400 },
+  });
 
   useEffect(() => {
     const getUid = () => {
@@ -96,6 +104,7 @@ export default function TweetCard(props) {
   };
 
   const countUp = () => {
+    setIsClicked(!isClicked);
     setGoodNum(goodNum + 1);
 
     setFavoriteColor('#E0245E');
@@ -190,13 +199,39 @@ export default function TweetCard(props) {
         disableSpacing
         style={{ display: 'flex', justifyContent: 'flex-end' }}
       >
-        <IconButton aria-label="add to favorites" onClick={countUp}>
-          <FavoriteIcon style={{ color: favoriteColor }} />
+        <IconButton
+          aria-label="add to favorites"
+          onClick={countUp}
+          style={{ paddingBottom: 2 }}
+        >
+          <animated.div
+            style={{
+              // opacity: x.interpolate({
+              //   range: [0, 1],
+              //   output: [1, 0.8, 1],
+              // }),
+              transform: x
+                .interpolate({
+                  range: [0, 0.25, 0.35, 0.45, 0.55, 0.65, 0.75, 1, 1.25, 1.4],
+                  output: [1, 0.2, 0.9, 1.1, 1.4, 1.1, 1],
+                })
+                .interpolate((x) => `scale(${x})`),
+            }}
+          >
+            {/* click */}
+            <FavoriteIcon style={{ color: favoriteColor }} />
+          </animated.div>
         </IconButton>
         <Typography
           display="inline"
           variant="caption"
-          style={{ marginLeft: -5, marginRight: 10, color: favoriteColor }}
+          align="left"
+          style={{
+            paddingLeft: 0,
+            paddingRight: 10,
+            color: favoriteColor,
+            width: 10,
+          }}
         >
           {goodNum - 1}
         </Typography>
