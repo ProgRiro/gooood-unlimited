@@ -6,7 +6,6 @@ import TweetCard from '../components/TweetCard';
 import axios from 'axios';
 import PulseLoader from 'react-spinners/PulseLoader';
 import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
 import errorImage from '../imgs/error.svg';
 
 const useStyles = makeStyles({
