@@ -54,8 +54,6 @@ const GoodList = () => {
     };
 
     getUid();
-
-    return () => getUid;
   }, []);
 
   useEffect(() => {
@@ -79,9 +77,6 @@ const GoodList = () => {
     };
 
     getData();
-
-    // unmount
-    return () => getData;
   }, [uid, isRefresh]);
 
   const isRefreshFunc = () => {
@@ -116,8 +111,6 @@ const GoodList = () => {
     };
 
     changePosts();
-
-    return () => changePosts;
   }, [posts]);
 
   return (

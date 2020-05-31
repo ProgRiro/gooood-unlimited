@@ -8,13 +8,13 @@ import CardActions from '@material-ui/core/CardActions';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import firebase, { db } from '../config';
-import { useSpring, animated } from 'react-spring';
+import $ from 'jquery';
+import '../animation.css';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,33 +24,26 @@ const useStyles = makeStyles((theme) => ({
     height: 0,
     paddingTop: '56.25%', // 16:9
   },
-  expand: {
-    transform: 'rotate(0deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
-  },
-  expandOpen: {
-    transform: 'rotate(180deg)',
-  },
 }));
 
 export default function TweetCard(props) {
   const classes = useStyles();
   const [uid, setUid] = useState([]);
   const [goodNum, setGoodNum] = useState(props.goodNum);
-  const [isClicked, setIsClicked] = useState(true);
   const [favoriteColor, setFavoriteColor] = useState('gray');
   const [anchorEl, setAnchorEl] = useState(null);
   const tweetId = props.tweetId;
   const open = Boolean(anchorEl);
 
-  const { x } = useSpring({
-    from: { x: 0 },
-    x: isClicked ? 1 : 0,
-    config: { duration: 400 },
-  });
+  useEffect(() => {
+    $('.heart').on('click', function () {
+      let $btn = $(this);
+      $btn.addClass('heartHover');
+      setTimeout(function () {
+        $btn.removeClass('heartHover');
+      }, 1000);
+    });
+  }, []);
 
   useEffect(() => {
     const getUid = () => {
@@ -65,8 +58,6 @@ export default function TweetCard(props) {
     };
 
     getUid();
-
-    return () => getUid;
   }, []);
 
   const pushData = async () => {
@@ -104,11 +95,8 @@ export default function TweetCard(props) {
   };
 
   const countUp = () => {
-    setIsClicked(!isClicked);
     setGoodNum(goodNum + 1);
-
     setFavoriteColor('#E0245E');
-
     pushData();
   };
 
@@ -202,25 +190,9 @@ export default function TweetCard(props) {
         <IconButton
           aria-label="add to favorites"
           onClick={countUp}
-          style={{ paddingBottom: 2 }}
+          style={{ marginRight: 10 }}
         >
-          <animated.div
-            style={{
-              // opacity: x.interpolate({
-              //   range: [0, 1],
-              //   output: [1, 0.8, 1],
-              // }),
-              transform: x
-                .interpolate({
-                  range: [0, 0.25, 0.35, 0.45, 0.55, 0.65, 0.75, 1, 1.25, 1.4],
-                  output: [1, 0.2, 0.9, 1.1, 1.4, 1.1, 1],
-                })
-                .interpolate((x) => `scale(${x})`),
-            }}
-          >
-            {/* click */}
-            <FavoriteIcon style={{ color: favoriteColor }} />
-          </animated.div>
+          <div className="heart"></div>
         </IconButton>
         <Typography
           display="inline"
