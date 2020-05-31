@@ -11,6 +11,7 @@ import TopNavbar from './components/TopNavbar';
 import Home from './pages/Home';
 import Top from './pages/Top';
 import TimeLine from './pages/TimeLine';
+import Search from './pages/Search';
 import GoodList from './pages/GoodList';
 import Page404 from './pages/Page404';
 import firebase, { db, providerTwitter } from './config';
@@ -149,6 +150,12 @@ function App() {
               exact
               // component={TimeLine}
               render={(props) => (isLogin ? <TimeLine /> : <Redirect to="/" />)}
+            />
+            <Route
+              path="/search"
+              exact
+              // component={TimeLine}
+              render={(props) => (isLogin ? <Search /> : <Redirect to="/" />)}
             />
             <Route
               path="/goodlist"

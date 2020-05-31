@@ -54,7 +54,13 @@ const Top = () => {
       <Grid item xs={12} md={5}>
         <Paper className={classes.paper}>
           <Typography variant="h4" style={{ color: 'black' }}>
-            🎉 Welcome 🎉
+            <span role="img" aria-labelledby="emoji">
+              🎉
+            </span>{' '}
+            Welcome{' '}
+            <span role="img" aria-labelledby="emoji">
+              🎉
+            </span>
           </Typography>
           <Typography variant="subtitle1">
             いいねした回数を自慢しよう
@@ -66,7 +72,13 @@ const Top = () => {
       <Grid item xs={12} md={7}>
         <Paper className={classes.paper}>
           <Typography variant="h5" style={{ color: 'black', marginTop: 20 }}>
-            🔰 Let's get started 🔰
+            <span role="img" aria-labelledby="emoji">
+              🔰
+            </span>{' '}
+            Let's get started{' '}
+            <span role="img" aria-labelledby="emoji">
+              🔰
+            </span>
           </Typography>
           <Typography variant="subtitle2">さぁ、はじめよう</Typography>
           <br />
@@ -74,7 +86,13 @@ const Top = () => {
         </Paper>
         <Paper className={classes.paper} style={{ marginTop: 10 }}>
           <Typography variant="h6" style={{ color: 'black', marginTop: 20 }}>
-            💻 About Developer 💻
+            <span role="img" aria-labelledby="emoji">
+              💻
+            </span>{' '}
+            About Developer{' '}
+            <span role="img" aria-labelledby="emoji">
+              💻
+            </span>
           </Typography>
           <Typography variant="subtitle2">開発者について</Typography>
           <br />

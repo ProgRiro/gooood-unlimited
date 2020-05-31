@@ -48,13 +48,13 @@ const ExPanel = () => {
           <Typography variant="body2" align="left">
             タイムラインボタンをクリックして、自分がフォローしているユーザーのツイートを閲覧できます。
             <img
-              alt="TimeLine Button Image"
+              alt="TimeLine Button"
               src={ExImage1}
               className={classes.exImage}
             />
             カード右下にあるいいねボタンは何回でも押すことが可能です。
             <img
-              alt="TimeLine Button Image"
+              alt="TimeLine Button"
               src={ExImage1}
               className={classes.exImage}
             />
@@ -75,13 +75,13 @@ const ExPanel = () => {
           <Typography variant="body2" align="left">
             シェアボタンをクリックすると、TweetCardが表示されます。
             <img
-              alt="TimeLine Button Image"
+              alt="TimeLine Button"
               src={ExImage1}
               className={classes.exImage}
             />
             画面右下の「ツイートする」をクリックすることでTwitterに投稿可能です。
             <img
-              alt="TimeLine Button Image"
+              alt="TimeLine Button"
               src={ExImage1}
               className={classes.exImage}
             />
@@ -102,7 +102,7 @@ const ExPanel = () => {
           <Typography variant="body2" align="left">
             あなたがGood Unlimitedからいいねを行ったツイートを一覧表示します。
             <img
-              alt="GoodList Button Image"
+              alt="GoodList Button"
               src={ExImage2}
               className={classes.exImage}
             />
@@ -124,7 +124,7 @@ const ExPanel = () => {
           <Typography variant="body2" align="left">
             通信エラーが発生した場合は、以下のような画面が表示されます。
             <img
-              alt="TimeLine Button Image"
+              alt="TimeLine Button"
               src={ExImage4}
               className={classes.exImage}
             />
