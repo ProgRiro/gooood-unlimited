@@ -8,12 +8,13 @@ import CardActions from '@material-ui/core/CardActions';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import firebase, { db } from '../config';
+import $ from 'jquery';
+import '../animation.css';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,16 +23,6 @@ const useStyles = makeStyles((theme) => ({
   media: {
     height: 0,
     paddingTop: '56.25%', // 16:9
-  },
-  expand: {
-    transform: 'rotate(0deg)',
-    marginLeft: 'auto',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
-  },
-  expandOpen: {
-    transform: 'rotate(180deg)',
   },
 }));
 
@@ -43,6 +34,16 @@ export default function TweetCard(props) {
   const [anchorEl, setAnchorEl] = useState(null);
   const tweetId = props.tweetId;
   const open = Boolean(anchorEl);
+
+  useEffect(() => {
+    $('.heart').on('click', function () {
+      let $btn = $(this);
+      $btn.addClass('heartHover');
+      setTimeout(function () {
+        $btn.removeClass('heartHover');
+      }, 1000);
+    });
+  }, []);
 
   useEffect(() => {
     const getUid = () => {
@@ -57,8 +58,6 @@ export default function TweetCard(props) {
     };
 
     getUid();
-
-    return () => getUid;
   }, []);
 
   const pushData = async () => {
@@ -97,9 +96,7 @@ export default function TweetCard(props) {
 
   const countUp = () => {
     setGoodNum(goodNum + 1);
-
     setFavoriteColor('#E0245E');
-
     pushData();
   };
 
@@ -190,13 +187,23 @@ export default function TweetCard(props) {
         disableSpacing
         style={{ display: 'flex', justifyContent: 'flex-end' }}
       >
-        <IconButton aria-label="add to favorites" onClick={countUp}>
-          <FavoriteIcon style={{ color: favoriteColor }} />
+        <IconButton
+          aria-label="add to favorites"
+          onClick={countUp}
+          style={{ marginRight: 10 }}
+        >
+          <div className="heart"></div>
         </IconButton>
         <Typography
           display="inline"
           variant="caption"
-          style={{ marginLeft: -5, marginRight: 10, color: favoriteColor }}
+          align="left"
+          style={{
+            paddingLeft: 0,
+            paddingRight: 10,
+            color: favoriteColor,
+            width: 10,
+          }}
         >
           {goodNum - 1}
         </Typography>

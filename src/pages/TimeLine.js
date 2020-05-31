@@ -187,7 +187,7 @@ const TimeLine = () => {
         <button
           onClick={isRefreshFunc}
           className={classes.refreshButton}
-          // type="button"
+          type="button"
         >
           {!loading && <Typography variant="button">再読み込み</Typography>}
         </button>
