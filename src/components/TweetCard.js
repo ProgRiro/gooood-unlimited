@@ -148,6 +148,7 @@ export default function TweetCard(props) {
                   target="_blank"
                   href={`https://twitter.com/${props.screenName}/status/${props.tweetId}`}
                   style={{ textDecoration: 'none', color: 'inherit' }}
+                  rel="noopener noreferrer"
                 >
                   このツイートをTwitterで表示する
                 </a>
@@ -169,6 +170,7 @@ export default function TweetCard(props) {
             target="_blank"
             href={`https://twitter.com/${props.screenName}`}
             style={{ textDecoration: 'none', color: '#00acee' }}
+            rel="noopener noreferrer"
           >
             @{props.screenName}
           </a>
@@ -180,7 +182,12 @@ export default function TweetCard(props) {
       )}
       <CardContent>
         <Typography variant="body2" color="textPrimary" align="left">
-          {props.text}
+          {props.text.split('\n').map((str, index) => (
+            <React.Fragment key={index}>
+              {str}
+              <br />
+            </React.Fragment>
+          ))}
         </Typography>
       </CardContent>
       <CardActions

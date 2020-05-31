@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import SearchIcon from '@material-ui/icons/Search';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import HomeRoundedIcon from '@material-ui/icons/HomeRounded';
 import ListAltRoundedIcon from '@material-ui/icons/ListAltRounded';
@@ -13,9 +14,10 @@ const useStyles = makeStyles({
     bottom: 0,
     left: 0,
     width: '100%',
-    // height: 45,
+    // height: 50,
     zIndex: 99,
     backgroundColor: '#f1f2f6',
+    borderTop: '1px solid rgba(0, 0, 0, 0.5)',
   },
 });
 
@@ -42,6 +44,12 @@ const SimpleBottomNavigation = () => {
         icon={<ListAltRoundedIcon />}
         component={Link}
         to="/timeline"
+      />
+      <BottomNavigationAction
+        // label="タイムライン"
+        icon={<SearchIcon />}
+        component={Link}
+        to="/search"
       />
       <BottomNavigationAction
         // label="いいね"
