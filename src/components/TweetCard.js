@@ -155,7 +155,7 @@ export default function TweetCard(props) {
               </MenuItem>
               {props.goodNum > 1 && (
                 <MenuItem onClick={handleDelete}>
-                  このツイートをいいね記録から削除
+                  このツイートを記録から削除
                 </MenuItem>
               )}
               <MenuItem onClick={handleClose} style={{ color: 'red' }}>
