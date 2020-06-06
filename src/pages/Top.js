@@ -69,7 +69,7 @@ const Top = () => {
           <SlideShow images={fadeImages} />
         </Paper>
       </Grid>
-      <Grid item xs={12} md={7}>
+      <Grid item xs={12} md={7} id="getstarted">
         <Paper className={classes.paper}>
           <Typography variant="h5" style={{ color: 'black', marginTop: 20 }}>
             <span role="img" aria-labelledby="emoji">

@@ -110,10 +110,10 @@ const GoodList = () => {
       await axios
         .get(
           // `http://localhost:8000/search/${uid}/${tweetId}`
-          `https://gooood-unlimited-api.herokuapp.com/gooood/${uid}`
+          `https://gooood-unlimited-api.herokuapp.com/search/${uid}/${tweetId}`
         ) //リクエストを飛ばすpath
         .then((response) => {
-          setInputValue('ツイートのURLを入力してください');
+          setInputValue('ツイートURLを入力してください');
           setPost(response.data);
         })
         .then(() => {
@@ -211,6 +211,14 @@ const GoodList = () => {
           </Grid>
         )}
       </Grid>
+      <Typography variant="body1" style={{ color: 'black' }} align="center">
+        <a
+          href="http://localhost:3000/top#getstarted"
+          style={{ textDecoration: 'none', color: '#00acee' }}
+        >
+          ツイートURLの取得方法
+        </a>
+      </Typography>
     </>
   );
 };

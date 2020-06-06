@@ -95,6 +95,28 @@ const ExPanel = () => {
           id="panel2a-header"
         >
           <Typography className={classes.heading}>
+            ツイートを検索していいねする
+          </Typography>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails>
+          <Typography variant="body2" align="left">
+            TwitterからツイートからコピーしたURLを、検索窓にペーストして検索します。
+            <img
+              alt="GoodList Button"
+              src={ExImage2}
+              className={classes.exImage}
+            />
+            特定のツイートに対して、好きな回数いいねができます。
+          </Typography>
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
+      <ExpansionPanel defaultExpanded={false}>
+        <ExpansionPanelSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel2a-content"
+          id="panel2a-header"
+        >
+          <Typography className={classes.heading}>
             過去にいいねしたツイートを閲覧する
           </Typography>
         </ExpansionPanelSummary>
