@@ -40,6 +40,33 @@ const ExPanel = () => {
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
+          <Typography className={classes.heading} style={{ color: 'red' }}>
+            Good Unlimited をホームに追加する
+          </Typography>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails>
+          <Typography variant="body2" align="left">
+            タイムラインボタンをクリックして、自分がフォローしているユーザーのツイートを閲覧できます。
+            <img
+              alt="TimeLine Button"
+              src={ExImage1}
+              className={classes.exImage}
+            />
+            カード右下にあるいいねボタンは何回でも押すことが可能です。
+            <img
+              alt="TimeLine Button"
+              src={ExImage1}
+              className={classes.exImage}
+            />
+          </Typography>
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
+      <ExpansionPanel defaultExpanded={false}>
+        <ExpansionPanelSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
           <Typography className={classes.heading}>
             タイムラインを表示する
           </Typography>
