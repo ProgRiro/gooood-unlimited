@@ -21,7 +21,7 @@ const Page404 = () => {
   return (
     <Grid container spacing={1} className={classes.root}>
       <Grid item xs>
-        <img src={Image404} width="80%" />
+        <img src={Image404} width="80%" alt="404" />
         <Typography variant="h2" style={{ color: 'black' }}>
           not found
         </Typography>

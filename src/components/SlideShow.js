@@ -36,7 +36,7 @@ const SlideShow = (props) => {
           return (
             <div className="each-fade" key={index}>
               <div className={classes.imageContainer}>
-                <img src={img} className={classes.image} />
+                <img src={img} className={classes.image} alt="slideImage" />
               </div>
             </div>
           );

@@ -214,9 +214,31 @@ export default function TweetCard(props) {
         >
           {goodNum - 1}
         </Typography>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
+        {goodNum > 1 && (
+          <a
+            target="_blank"
+            href={`http://twitter.com/share?text=%23GoodUnlimited%20で%0a@${
+              props.screenName
+            }さんの投稿に%0a%0a🎉🎉%20${
+              goodNum - 1
+            }回%20🎉🎉%0a%0aいいね❤️したよ！%0a%0aGoodUnlimitedで無限にいいねして%0aいいねした回数をシェアしよう！%0ahttps://gooood-unlimited.web.app%0a%0a👇%20${
+              goodNum - 1
+            }回%20いいねしたツイート👇%0ahttps://twitter.com/${
+              props.screenName
+            }/status/${props.tweetId}`}
+            style={{ textDecoration: 'none', color: '#00acee' }}
+            rel="noopener noreferrer"
+          >
+            <IconButton aria-label="share">
+              <ShareIcon style={{ color: '#00acee' }} />
+            </IconButton>
+          </a>
+        )}
+        {goodNum === 1 && (
+          <IconButton aria-label="share">
+            <ShareIcon />
+          </IconButton>
+        )}
       </CardActions>
     </Card>
   );

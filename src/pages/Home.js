@@ -8,8 +8,10 @@ import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import SampleTweetCard from '../components/SampleTweetCard';
 
 // for slideshow
+import slideImage0 from '../imgs/ogp.png';
 import slideImage1 from '../imgs/slide1.png';
 import slideImage2 from '../imgs/slide2.png';
 import slideImage3 from '../imgs/slide3.png';
@@ -36,7 +38,13 @@ const useStyles = makeStyles((theme) => ({
 
 const Home = (props) => {
   const classes = useStyles();
-  const fadeImages = [slideImage1, slideImage2, slideImage3, slideImage4];
+  const fadeImages = [
+    slideImage0,
+    slideImage1,
+    slideImage2,
+    slideImage3,
+    slideImage4,
+  ];
 
   return (
     <div className={classes.root}>
@@ -52,7 +60,9 @@ const Home = (props) => {
           <Grid item xs={12} md={4}>
             <Paper className={classes.paper}>
               <Box my={2}>
-                <Typography variant="h2">Good Unlimited</Typography>
+                <Typography variant="h2">
+                  <span style={{ color: '#E0245E' }}>Good</span> Unlimited
+                </Typography>
                 <Typography variant="subtitle1">
                   <br />
                   あの人の投稿に、無限回いいねしよう
@@ -75,11 +85,50 @@ const Home = (props) => {
                 }}
                 align={'center'}
                 iconSize={18}
-              ></TwitterLoginButton>
+              >
+                Twitterでログインする
+              </TwitterLoginButton>
+              {/* <Paper className={classes.paper}> */}
+              <Box my={2}>
+                <Typography variant="h4">
+                  <br />
+                  体験する
+                </Typography>
+                <Typography variant="caption">
+                  <br />
+                  サンプルツイートに無限回いいねしてみよう！
+                  <br />
+                </Typography>
+              </Box>
+              <SampleTweetCard />
+              {/* </Paper> */}
             </Paper>
           </Grid>
           <Grid item xs={12} md={8}>
             <Paper className={classes.paper}>
+              <Box my={2}>
+                <Typography variant="h4">Good Unlimited とは</Typography>
+                <Typography variant="caption">
+                  <br />
+                  「このTweetに何回もいいねしたいな...」
+                  <br />
+                  「この人の投稿好きだな...」
+                  <br />
+                  こんな風に思ったことありませんか？
+                  <br />
+                  <br />
+                  Good Unlimited
+                  なら、「何回もいいねを押す」という体験が簡単にできます。
+                  <br />
+                  思う存分いいねをしたら、その回数をTwitterにシェアしましょう！
+                  <br />
+                  きっと、たくさんいいねをもらった人は嬉しいはず。
+                  <br />
+                  <br />
+                  Twitterをたくさんの『いいね』で溢れさせませんか？
+                  <br />
+                </Typography>
+              </Box>
               <SlideShow images={fadeImages} />
             </Paper>
           </Grid>

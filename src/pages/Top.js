@@ -113,29 +113,9 @@ const Top = () => {
             趣味で個人開発をしている大学生です。
             <br />
             <br />
-            Good Unlimited に興味を持っていただきありがとうございます。
-            <br />
             このサービスは「このツイートにいいねを何回もしたいけど、1回しかできないのが惜しい...何回でもいいねできるサービスがあればいいな」という気軽な思いから開発しました。
             Good Unlimited
             を通して、Twitterにたくさんのいいねが溢れたら嬉しいです。
-            {/* <br />
-            <br />
-            フロントからバックエンド(API設計)まで全て1人で開発しました。
-            これまでに作成したものは
-            <a
-              href="https://portfolio.progriro.net/"
-              style={{ textDecoration: 'none', color: '#00acee' }}
-            >
-              ポートフォリオサイト
-            </a>
-            にまとめています。また、更新頻度は低めですが、
-            <a
-              href="https://progriro.net/"
-              style={{ textDecoration: 'none', color: '#00acee' }}
-            >
-              ブログ
-            </a>
-            も運営しています。 */}
             <br />
             <br />
             ご意見・ご要望・改善点など御座いましたら、

@@ -24,3 +24,6 @@
     background-position: -2800px 0;
   }
 }
+.MuiIconButton-root {
+  transform: scale(0.7);
+}

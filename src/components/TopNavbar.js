@@ -13,9 +13,9 @@ import Box from '@material-ui/core/Box';
 import { TwitterShareButton, TwitterIcon } from 'react-share';
 
 const config = {
-  shareTitle: '👍 Good Unlimited 👍',
+  shareTitle: '🎉 Good Unlimited 🎉',
   shareText:
-    'お気に入りのツイートを無限に いいね❤️ して、いいねした数をTwitterでシェアしよう！',
+    'お気に入りのツイートに\n好きなだけいいね❤️して\nいいねした回数を\nTwitterでシェアしよう✨',
   tag: '#GoodUnlimited #無限いいね',
   size: 32,
 };

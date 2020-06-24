@@ -5,7 +5,6 @@ import Grid from '@material-ui/core/Grid';
 import TweetCard from '../components/TweetCard';
 import axios from 'axios';
 import PulseLoader from 'react-spinners/PulseLoader';
-import errorImage from '../imgs/error.svg';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
@@ -143,7 +142,13 @@ const GoodList = () => {
         style={{ color: 'black', marginTop: 100 }}
         align="center"
       >
-        🔍 ツイートのURLで検索 🔎
+        <span role="img" aria-labelledby="emoji">
+          🔍
+        </span>{' '}
+        ツイートのURLで検索{' '}
+        <span role="img" aria-labelledby="emoji">
+          🔎
+        </span>
       </Typography>
       <Paper
         component="form"
@@ -213,7 +218,7 @@ const GoodList = () => {
       </Grid>
       <Typography variant="body1" style={{ color: 'black' }} align="center">
         <a
-          href="http://localhost:3000/top#getstarted"
+          href="https://gooood-unlimited.web.app/top#getstarted"
           style={{ textDecoration: 'none', color: '#00acee' }}
         >
           ツイートURLの取得方法

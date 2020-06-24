@@ -84,23 +84,6 @@ function App() {
       });
   };
 
-  const logout = () => {
-    if (firebase.auth().currentUser == null) {
-      return;
-    }
-
-    firebase
-      .auth()
-      .signOut()
-      .then(function () {
-        // Sign-out successful.
-        setIsLogin(false);
-      })
-      .catch(function (error) {
-        // An error happened.
-      });
-  };
-
   const pushData = async (uid, token, secret) => {
     await db
       .collection('users')
