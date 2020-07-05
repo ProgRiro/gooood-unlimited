@@ -52,7 +52,7 @@ export default function TweetCard(props) {
           // console.log('is login');
           setUid(user.uid);
         } else {
-          console.log('is not login');
+          // console.log('is not login');
         }
       });
     };

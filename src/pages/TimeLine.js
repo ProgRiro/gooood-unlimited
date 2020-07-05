@@ -76,7 +76,7 @@ const TimeLine = () => {
           // console.log('is login');
           setUid(user.uid);
         } else {
-          console.log('is not login');
+          // console.log('is not login');
         }
       });
     };
